@@ -17,6 +17,9 @@
 
 <!--<script src="js/script.js"></script>-->
 <script>
+    /**
+     * Initialisation des variables
+     **/
     const conteneur = document.querySelector(".texte");
     const image = document.querySelector(".image");
 
@@ -35,29 +38,40 @@
 
     let premierImage = "/res/image_fond.jpg";
 
-    spaceShips.forEach((ship) => {
 
+    /**
+     *  Pour chaque vaisseaux 'ship' dans le tableau spaceShips fait : 
+     **/
+    spaceShips.forEach((ship) => {
+        //créer une balise p qui va contenir le nom du vaisseau et il aura une classe css 'nomVaisseaux'
+        //et il sera ajouté a la balise conteneur
         let nomVais = document.createElement("p");
         nomVais.textContent = ship.nom;
         nomVais.className = "nomVaisseaux";
         conteneur.appendChild(nomVais);
 
+        //au click de l'une des balise p:  
         nomVais.addEventListener("click", function () {
+            //on vérifie si l'une des balise est déjà sélectionnée
             const ancienneSelection = document.querySelector(".nomVaisseaux.Selected");
+            //si ancienneSelection n'est pas vide alors on supprime la classe 'Selected'
             if (ancienneSelection) {
                 ancienneSelection.classList.remove('Selected');
             }
+            // Puis on applique l'image du vaisseaux à la balise image et on donne la classe 
+            //'Selected a la balise p'
             image.style.backgroundImage = `url(${ship.vaiss})`;
             premierImage = ship.vaiss;
             nomVais.className = "nomVaisseaux Selected";
         })
 
+        //S'active au survol de la souris
         nomVais.addEventListener("mouseover", function () {
             image.style.backgroundImage = `url(${ship.vaiss})`;
             nomVais.style.backgroundColor = "lightgrey";
         });
 
-
+        //S'active après que la souris ne survole plus l'élément
         nomVais.addEventListener("mouseleave", function () {
             image.style.backgroundImage = `url(${premierImage})`;
             nomVais.style.backgroundColor = 'skyblue';
