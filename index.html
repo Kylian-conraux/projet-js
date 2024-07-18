@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="image"></div>
+        <div class="texte"></div>
+    </div>
+</body>
+
+<!--<script src="js/script.js"></script>-->
+<script>
+
+    const conteneur = document.querySelector(".texte");
+    const image = document.querySelector(".image");
+
+    const spaceShips = [
+        { nom: "Beau vaisseau blanc", vaiss: "res/spaceship1.jpg" },
+        { nom: "Beau vaisseau blanc et couché de soleil", vaiss: "res/spaceship2.jpg" },
+        { nom: "Beau vaisseau noir", vaiss: "res/spaceship3.jpg" },
+        { nom: "Vaisseau vu du dessus", vaiss: "res/spaceship4.jpg" },
+        { nom: "Vaisseau vu du dessus et blanc", vaiss: "res/spaceship5.jpg" },
+        { nom: "Beau vaisseau blanc", vaiss: "res/spaceship1.jpg" },
+        { nom: "Beau vaisseau blanc et couché de soleil", vaiss: "res/spaceship2.jpg" },
+        { nom: "Beau vaisseau noir", vaiss: "res/spaceship3.jpg" },
+        { nom: "Vaisseau vu du dessus", vaiss: "res/spaceship4.jpg" },
+        { nom: "Vaisseau vu du dessus et blanc", vaiss: "res/spaceship5.jpg" },
+    ];
+
+    let premierImage = "/res/image_fond.jpg";
+
+    spaceShips.forEach((ship) => {
+
+        let nomVais = document.createElement("p");
+        nomVais.textContent = ship.nom;
+        nomVais.className = "nomVaisseaux";
+        conteneur.appendChild(nomVais);
+
+        nomVais.addEventListener("click", function () {
+            const ancienneSelection = document.querySelector(".nomVaisseaux.Selected");
+            if (ancienneSelection) {
+                ancienneSelection.classList.remove('Selected');
+            }
+            image.style.backgroundImage = `url(${ship.vaiss})`;
+            premierImage = ship.vaiss;
+            nomVais.className = "nomVaisseaux Selected";
+        })
+
+        nomVais.addEventListener("mouseover", function () {
+            image.style.backgroundImage = `url(${ship.vaiss})`;
+            nomVais.style.backgroundColor = "lightgrey";
+        });
+
+
+        nomVais.addEventListener("mouseleave", function () {
+            image.style.backgroundImage = `url(${premierImage})`;
+            nomVais.style.backgroundColor = 'skyblue';
+        })
+    });
+
+</script>
+
+</html>
